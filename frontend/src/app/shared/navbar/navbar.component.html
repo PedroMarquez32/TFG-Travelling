@@ -1,1 +1,16 @@
-<p>navbar works!</p>
+<nav class="nav-bar">
+  <div class="logo" routerLink="/" style="cursor: pointer;">
+    <img src="assets/images/logo.svg" alt="TravelDream Logo" class="frame">
+    <span class="travel-dream">TravelDream</span>
+  </div>
+
+  <div class="menu-items">
+    <a routerLink="/destinations" routerLinkActive="active" class="destinations">Destinations</a>
+    <a routerLink="/custom-trip" routerLinkActive="active" class="packages">Custom Trip</a>
+    <a routerLink="/contact" routerLinkActive="active" class="contact">Contact</a>
+  </div>
+
+  <div class="auth-buttons">
+    <button routerLink="/login" class="cta-button">Login</button>
+  </div>
+</nav>

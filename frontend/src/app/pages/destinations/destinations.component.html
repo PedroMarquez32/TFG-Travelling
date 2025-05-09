@@ -1,0 +1,77 @@
+<div class="destinations-page">
+  <app-navbar></app-navbar>
+
+  <section class="destinations-hero">
+    <h1>Our Destinations</h1>
+    <p>Explore our carefully curated selection of the world's most amazing travel experiences</p>
+    
+    <div class="search-filters">
+      <div class="search-bar">
+        <input type="text" placeholder="Search destinations...">
+        <button class="search-button">🔍</button>
+      </div>
+      
+      <div class="filters">
+        <select class="filter-select">
+          <option value="">Region</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Price</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Duration</option>
+        </select>
+        <select class="filter-select">
+          <option value="">Rating</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <section class="destinations-grid">
+    <div class="active-filters">
+      <span>Active filters:</span>
+      <button class="filter-tag">Default</button>
+      <button class="clear-filters">Clear all</button>
+    </div>
+
+    <div class="destinations-cards">
+      <div class="destination-card" *ngFor="let destination of destinations">
+        <div class="card-image" [style.backgroundImage]="'url(' + destination.image + ')'">
+          <div class="card-tag" *ngIf="destination.tag">{{destination.tag}}</div>
+          <button class="favorite-button">❤</button>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h3>{{destination.name}}</h3>
+            <div class="duration">
+              <span class="icon">⏱</span>
+              <span>{{destination.duration}}</span>
+            </div>
+          </div>
+          <p class="description">{{destination.description}}</p>
+          <div class="card-footer">
+            <div class="rating">
+              <span class="stars">⭐ {{destination.rating}}</span>
+              <span class="reviews">({{destination.reviews}})</span>
+            </div>
+            <div class="price-section">
+              <span class="price">From ${{destination.price}}</span>
+              <button class="view-details" (click)="viewDestinationDetails(destination.name)">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination">
+      <button class="page-button active">1</button>
+      <button class="page-button">2</button>
+      <button class="page-button">3</button>
+      <button class="page-button">4</button>
+      <button class="page-button">5</button>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div> 

@@ -1,0 +1,72 @@
+<div class="home-page">
+  <app-navbar></app-navbar>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="discover-your-dream-destination">Discover Your Dream Destination</h1>
+      <p class="hero-description">Explore the world's most beautiful places with our exclusive travel packages. Create memories that last a lifetime.</p>
+      <div class="search-bar">
+        <div class="input-area">
+          <input type="text" placeholder="Search destinations..." class="search-input">
+        </div>
+        <button class="search-button">
+          <span class="search-icon">🔍</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-destinations">
+    <div class="section-header">
+      <h2 class="featured-destinations-title">Featured Destinations</h2>
+      <p class="section-description">Explore our handpicked selection of the most breathtaking places around the globe</p>
+    </div>
+    <div class="destination-cards">
+      <div class="destination-card" *ngFor="let destination of featuredDestinations">
+        <img [src]="destination.image" [alt]="destination.name" class="destination-image">
+        <div class="destination-content">
+          <h3 class="destination-name">{{destination.name}}</h3>
+          <p class="destination-description">{{destination.description}}</p>
+          <div class="destination-footer">
+            <span class="price">From ${{destination.price}}</span>
+            <button class="explore-button" (click)="viewDestinationDetails(destination.name)">Explore</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="special-offers">
+    <div class="offer-header">
+      <h2 class="special-offers-title">Special Offers</h2>
+      <p class="offer-description">Limited-time deals on our most popular packages</p>
+    </div>
+    <div class="offer-cards">
+      <div class="offer-card" *ngFor="let offer of specialOffers">
+        <div class="offer-badge">
+          <span class="discount">{{offer.discount}}%</span>
+          <span class="off">OFF</span>
+        </div>
+        <div class="offer-content">
+          <h3 class="offer-title">{{offer.title}}</h3>
+          <p class="offer-description">{{offer.description}}</p>
+          <div class="price-row">
+            <span class="original-price">${{offer.originalPrice}}</span>
+            <span class="discounted-price">${{offer.discountedPrice}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="newsletter">
+    <h2 class="get-inspired">Get Inspired</h2>
+    <p class="newsletter-description">Subscribe to our newsletter for exclusive deals and travel tips</p>
+    <div class="subscribe-form">
+      <input type="email" placeholder="Your email address" class="email-input">
+      <button class="subscribe-button">Subscribe</button>
+    </div>
+  </section>
+
+  <app-footer></app-footer>
+</div>

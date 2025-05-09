@@ -1,0 +1,138 @@
+<div class="destination-details">
+  <app-navbar></app-navbar>
+
+  <div class="hero-section" [style.backgroundImage]="'url(assets/images/' + destination.name.toLowerCase().replace(', ', '-') + '.jpg)'">
+    <div class="hero-content">
+      <h1>{{destination.name}}</h1>
+      <div class="trip-info">
+        <span class="duration">⏱ {{destination.duration}}</span>
+        <span class="rating">⭐ {{destination.rating}} ({{destination.reviewCount}} reviews)</span>
+        <span class="price">From ${{destination.price}} per person</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="main-content">
+      <section class="overview">
+        <h2>Overview</h2>
+        <p>{{destination.overview}}</p>
+        <p>{{destination.description}}</p>
+      </section>
+
+      <section class="highlights">
+        <h2>Highlights</h2>
+        <div class="highlights-list">
+          <div class="highlight-item" *ngFor="let highlight of destination.highlights">
+            <div class="highlight-icon">★</div>
+            <div class="highlight-content">
+              <h3>{{highlight.title}}</h3>
+              <p>{{highlight.description}}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="itinerary">
+        <h2>Itinerary</h2>
+        <div class="itinerary-timeline">
+          <div class="day-item" *ngFor="let day of destination.itinerary">
+            <h3 (click)="toggleDay(day.day)" 
+                [class.expanded]="isDayExpanded(day.day)">
+              Day {{day.day}}: {{day.title}}
+            </h3>
+            <ul *ngIf="isDayExpanded(day.day)">
+              <li *ngFor="let activity of day.activities">{{activity}}</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="accommodation">
+        <h2>Accommodation</h2>
+        <div class="hotel-card">
+          <img [src]="'assets/images/hotel-' + destination.accommodation.name.toLowerCase().replace(' ', '-') + '.jpg'" [alt]="destination.accommodation.name">
+          <div class="hotel-info">
+            <h3>{{destination.accommodation.name}}</h3>
+            <div class="hotel-rating">⭐ {{destination.accommodation.rating}}</div>
+            <p>{{destination.accommodation.description}}</p>
+            <div class="hotel-features">
+              <span *ngFor="let feature of destination.accommodation.features">{{feature}}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews">
+        <h2>
+          Reviews 
+          <span class="rating-summary">
+            <span class="star">★</span> {{destination.rating}} ({{destination.reviewCount}} reviews)
+          </span>
+        </h2>
+        <div class="review-card" *ngFor="let review of destination.userReviews">
+          <div class="reviewer-info">
+            <div class="avatar"></div>
+            <div class="reviewer-details">
+              <h4>{{review.name}}</h4>
+              <span class="review-date">{{review.date}}</span>
+            </div>
+            <div class="rating">★★★★★</div>
+          </div>
+          <p class="review-comment">{{review.comment}}</p>
+        </div>
+        <button class="view-all-reviews">
+          View all {{destination.reviewCount}} reviews
+        </button>
+      </section>
+    </div>
+
+    <div class="booking-sidebar">
+      <div class="booking-card">
+        <h3>Book This Trip</h3>
+        <div class="booking-form">
+          <div class="form-group">
+            <label>Travel Dates</label>
+            <input type="date" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Travelers</label>
+            <select class="form-control">
+              <option>2 Adults</option>
+              <option>3 Adults</option>
+              <option>4 Adults</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Room Type</label>
+            <select class="form-control">
+              <option>Standard Double View</option>
+              <option>Superior Suite</option>
+            </select>
+          </div>
+          <div class="price-details">
+            <div class="price-item">
+              <span>Package Price (2 adults)</span>
+              <span>${{destination.price}}</span>
+            </div>
+            <div class="price-item">
+              <span>Taxes & Fees</span>
+              <span>$180</span>
+            </div>
+            <div class="price-total">
+              <span>Total</span>
+              <span>${{destination.price + 180}}</span>
+            </div>
+          </div>
+          <button class="book-now-button">Book Now</button>
+          <div class="booking-notes">
+            <p>✓ Free cancellation up to 30 days before departure</p>
+            <p>✓ Only $200 deposit required to secure booking</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div> 

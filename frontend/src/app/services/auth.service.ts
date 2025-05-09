@@ -1,35 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
-interface AuthResponse {
-  access_token: string;
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'admin' | 'user';
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = '/api';
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
-
-  login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { email, password }).pipe(
-      tap((response: AuthResponse) => {
-        if (response.access_token) {
-          localStorage.setItem('token', response.access_token);
-        }
-      })
-    );
+  constructor() {
+    // Simulamos un usuario logueado para desarrollo
+    this.currentUserSubject.next({
+      id: '1',
+      name: 'John Doe',
+      email: 'john@example.com',
+      role: 'admin'
+    });
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
+  isAdmin(): boolean {
+    return this.currentUserSubject.value?.role === 'admin';
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return !!this.currentUserSubject.value;
+  }
+
+  logout(): void {
+    this.currentUserSubject.next(null);
   }
 } 

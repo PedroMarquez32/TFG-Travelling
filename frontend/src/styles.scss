@@ -1,6 +1,79 @@
-/* Estilos globales */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+// Incluir los estilos base de Material
+@include mat.core();
+
+// Definir la paleta de colores
+
+
+
+
+// Aplicar el tema
+
+// Estilos globales
 html, body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-} 
+}
+
+// Reset básico
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: var(--cream);
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+/* Variables globales de color */
+:root {
+  --primary: #3A3A3C;
+  --secondary: #4DA8DA;
+  --accent: #3DBFBC;
+  --coral: #FF6B6B;
+  --cream: #F6E7D7;
+  --white: #FFFFFF;
+  --text-dark: #3A3A3C;
+  --text-light: #F6E7D7;
+}
+
+/* Estilos de botones personalizados */
+.btn-primary {
+  background-color: var(--accent-coral);
+  color: var(--white);
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+}
+
+.section-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: var(--text-gray);
+  text-align: center;
+  margin-bottom: 48px;
+}

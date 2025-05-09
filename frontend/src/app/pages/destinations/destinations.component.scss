@@ -1,0 +1,222 @@
+.destinations-page {
+  background: var(--cream);
+  min-height: 100vh;
+}
+
+.destinations-hero {
+  background: linear-gradient(270deg, var(--secondary) 0%, var(--accent) 100%);
+  padding: 120px 80px 60px;
+  text-align: center;
+  color: var(--white);
+
+  h1 {
+    font-family: "PlayfairDisplay-Bold", sans-serif;
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+}
+
+.search-filters {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .search-bar {
+    display: flex;
+    margin-bottom: 24px;
+    
+    input {
+      flex: 1;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 32px 0 0 32px;
+      font-size: 16px;
+    }
+
+    .search-button {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 0 32px 32px 0;
+      background: var(--coral);
+      color: var(--white);
+      cursor: pointer;
+    }
+  }
+
+  .filters {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+
+    .filter-select {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 20px;
+      background: var(--white);
+      cursor: pointer;
+    }
+  }
+}
+
+.destinations-grid {
+  padding: 60px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  .active-filters {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+
+    .filter-tag {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: var(--white);
+      border: 1px solid var(--secondary);
+      cursor: pointer;
+    }
+
+    .clear-filters {
+      color: var(--coral);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  .destinations-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .destination-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+    .card-image {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+
+      .card-tag {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: var(--coral);
+        color: var(--white);
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+      }
+
+      .favorite-button {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: var(--white);
+        border: none;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+      }
+    }
+
+    .card-content {
+      padding: 24px;
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        h3 {
+          font-size: 20px;
+          font-weight: 700;
+        }
+
+        .duration {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: var(--text-dark);
+        }
+      }
+
+      .description {
+        color: var(--text-dark);
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .rating {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .price-section {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 8px;
+
+          .price {
+            color: var(--secondary);
+            font-weight: 700;
+          }
+
+          .view-details {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+
+            &:hover {
+              transform: translateY(-2px);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    .page-button {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--secondary);
+      border-radius: 50%;
+      background: var(--white);
+      cursor: pointer;
+
+      &.active {
+        background: var(--secondary);
+        color: var(--white);
+      }
+    }
+  }
+} 

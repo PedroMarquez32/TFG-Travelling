@@ -1,0 +1,92 @@
+.nav-bar {
+  background: var(--primary);
+  padding: 0px 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+
+  .logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    .frame {
+      width: 32px;
+      height: 32px;
+    }
+
+    .travel-dream {
+      color: var(--text-light);
+      font-family: "Montserrat-Bold", sans-serif;
+      font-size: 24px;
+      line-height: 28.8px;
+      font-weight: 700;
+    }
+  }
+
+  .menu-items {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+
+    a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-family: "Montserrat-Medium", sans-serif;
+      font-size: 16px;
+      line-height: 19.2px;
+      font-weight: 500;
+      transition: color 0.3s;
+
+      &:hover, &.active {
+        color: var(--secondary);
+      }
+    }
+  }
+
+  .auth-buttons {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+
+    .cta-button {
+      background: var(--coral);
+      border-radius: 30px;
+      padding: 12px 32px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--white);
+      font-family: "Montserrat-SemiBold", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+      }
+    }
+  }
+}
+
+.brand {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

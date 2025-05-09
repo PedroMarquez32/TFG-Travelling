@@ -1,0 +1,413 @@
+.destination-details {
+  background: var(--cream);
+  min-height: 100vh;
+}
+
+.hero-section {
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding-top: 80px;
+  display: flex;
+  align-items: flex-end;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 60px;
+    color: var(--white);
+
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .trip-info {
+      display: flex;
+      gap: 32px;
+      font-size: 18px;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  }
+}
+
+.content-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 48px;
+}
+
+.main-content {
+  section {
+    margin-bottom: 48px;
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text-dark);
+    }
+  }
+}
+
+.highlights {
+  margin-bottom: 48px;
+
+  h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-dark);
+  }
+
+  .highlights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+
+      .highlight-icon {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        background: var(--secondary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        font-size: 14px;
+      }
+
+      .highlight-content {
+        h3 {
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--text-dark);
+          margin-bottom: 8px;
+        }
+
+        p {
+          color: var(--text-dark);
+          opacity: 0.8;
+          line-height: 1.5;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+.itinerary {
+  margin-bottom: 48px;
+
+  h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-dark);
+  }
+
+  .day-item {
+    margin-bottom: 16px;
+    
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      
+      &::after {
+        content: '▼';
+        margin-left: 8px;
+        font-size: 12px;
+        transition: transform 0.3s ease;
+      }
+
+      &.expanded::after {
+        transform: rotate(180deg);
+      }
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        color: var(--text-dark);
+        opacity: 0.8;
+        margin-bottom: 12px;
+        padding-left: 16px;
+        position: relative;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: var(--secondary);
+        }
+      }
+    }
+  }
+}
+
+.hotel-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .hotel-info {
+    padding: 24px;
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .hotel-rating {
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+
+    .hotel-features {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+
+      span {
+        padding: 8px 16px;
+        background: var(--cream);
+        border-radius: 20px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.review-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    .reviewer-info {
+      h4 {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .review-date {
+        color: var(--text-dark);
+        opacity: 0.7;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.booking-sidebar {
+  .booking-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 8px;
+      }
+    }
+
+    .price-details {
+      margin: 24px 0;
+      
+      .price-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+
+      .price-total {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        font-size: 18px;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(0,0,0,0.1);
+      }
+    }
+
+    .book-now-button {
+      width: 100%;
+      padding: 16px;
+      background: var(--coral);
+      color: var(--white);
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255,107,107,0.3);
+      }
+    }
+
+    .booking-notes {
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--text-dark);
+      opacity: 0.8;
+
+      p {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+.reviews {
+  h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .rating-summary {
+      font-size: 18px;
+      color: var(--text-dark);
+      
+      .star {
+        color: #FFD700;
+      }
+    }
+  }
+
+  .review-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--cream);
+        margin-right: 16px;
+      }
+
+      .reviewer-details {
+        h4 {
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+
+        .review-date {
+          color: var(--text-dark);
+          opacity: 0.6;
+          font-size: 14px;
+        }
+      }
+
+      .rating {
+        margin-left: auto;
+        color: #FFD700;
+      }
+    }
+
+    .review-comment {
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+  }
+
+  .view-all-reviews {
+    display: inline-block;
+    color: var(--secondary);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+} 

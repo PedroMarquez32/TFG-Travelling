@@ -1,0 +1,194 @@
+<div class="custom-trip-page">
+  <div class="hero-section">
+    <h1>Create Your Dream Trip</h1>
+    <p>Design a personalized travel experience tailored to your preferences, budget, and schedule</p>
+  </div>
+
+  <div class="content-container">
+    <div class="main-content">
+      <!-- Step 1: Choose Destination -->
+      <div class="step-section">
+        <div class="step-header">
+          <span class="step-number">1</span>
+          <h2>Choose Your Destination</h2>
+        </div>
+        
+        <div class="search-container">
+          <input 
+            type="text" 
+            placeholder="Search destinations or regions..."
+            [(ngModel)]="searchQuery"
+          >
+          <button class="search-button">🔍</button>
+        </div>
+
+        <div class="popular-destinations">
+          <h3>Popular destinations</h3>
+          <div class="destination-tags">
+            <button 
+              *ngFor="let dest of popularDestinations" 
+              [class.selected]="selectedDestination === dest"
+              (click)="selectDestination(dest)"
+            >
+              {{dest}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Select Travel Dates -->
+      <div class="step-section">
+        <div class="step-header">
+          <span class="step-number">2</span>
+          <h2>Select Travel Dates</h2>
+        </div>
+        
+        <div class="dates-container">
+          <div class="date-input">
+            <label>Departure</label>
+            <input type="date" [(ngModel)]="departureDate">
+          </div>
+          <div class="date-input">
+            <label>Return</label>
+            <input type="date" [(ngModel)]="returnDate">
+          </div>
+        </div>
+        <label class="flexible-dates">
+          <input type="checkbox" [(ngModel)]="isFlexible">
+          My dates are flexible (±3 days)
+        </label>
+      </div>
+
+      <!-- Step 3: Travelers & Budget -->
+      <div class="step-section">
+        <div class="step-header">
+          <span class="step-number">3</span>
+          <h2>Travelers & Budget</h2>
+        </div>
+        
+        <h3>How many travelers?</h3>
+        <div class="travelers-input">
+          <div class="counter">
+            <span>Adults (Ages 13+)</span>
+            <div class="counter-controls">
+              <button (click)="decreaseAdults()">-</button>
+              <span>{{adults}}</span>
+              <button (click)="increaseAdults()">+</button>
+            </div>
+          </div>
+        </div>
+
+        <h3>What's your budget per person?</h3>
+        <div class="budget-slider-container">
+          <input 
+            type="range" 
+            [(ngModel)]="budgetValue" 
+            min="500" 
+            max="3000" 
+            step="100"
+            class="budget-slider"
+          >
+          <div class="budget-labels">
+            <span class="min-budget">$500</span>
+            <span class="current-budget">${{budgetValue}}</span>
+            <span class="max-budget">$3,000+</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Travel Preferences -->
+      <div class="step-section">
+        <div class="step-header">
+          <span class="step-number">4</span>
+          <h2>Travel Preferences</h2>
+        </div>
+        
+        <h3>What are you interested in?</h3>
+        <div class="preferences-grid">
+          <button 
+            *ngFor="let pref of preferences" 
+            [class.selected]="selectedPreferences.includes(pref)"
+            (click)="togglePreference(pref)"
+          >
+            {{pref}}
+          </button>
+        </div>
+
+        <h3>Preferred accommodation type</h3>
+        <div class="accommodation-options">
+          <button 
+            *ngFor="let type of accommodationTypes" 
+            [class.selected]="selectedAccommodation === type"
+            (click)="selectAccommodation(type)"
+          >
+            <span class="icon">🏨</span>
+            <span>{{type}}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="save-draft">Save Draft</button>
+        <button class="create-trip">Create My Trip</button>
+      </div>
+    </div>
+
+    <!-- Trip Summary Sidebar -->
+    <div class="trip-summary">
+      <h2>Trip Summary</h2>
+      <div class="summary-item">
+        <span>📍 Destination</span>
+        <span>{{selectedDestination || 'Not selected'}}</span>
+      </div>
+      <div class="summary-item">
+        <span>📅 Dates</span>
+        <span>{{formatDates()}}</span>
+      </div>
+      <div class="summary-item">
+        <span>👥 Travelers</span>
+        <span>{{adults}} Adults</span>
+      </div>
+      <div class="summary-item">
+        <span>💰 Budget per person</span>
+        <span>${{budgetValue}}</span>
+      </div>
+      <div class="summary-item">
+        <span>🏨 Accommodation</span>
+        <span>{{selectedAccommodation || 'Not selected'}}</span>
+      </div>
+      <div class="summary-item">
+        <span>❤️ Preferences</span>
+        <div class="selected-preferences">
+          <span *ngFor="let pref of selectedPreferences">{{pref}}</span>
+        </div>
+      </div>
+
+      <div class="cost-estimate">
+        <h3>Estimated Total Cost</h3>
+        <div class="cost-item">
+          <span>Accommodation (7 nights)</span>
+          <span>$1,400</span>
+        </div>
+        <div class="cost-item">
+          <span>Activities & Experiences</span>
+          <span>$800</span>
+        </div>
+        <div class="cost-item">
+          <span>Transportation</span>
+          <span>$600</span>
+        </div>
+        <div class="cost-item">
+          <span>Meals & Dining</span>
+          <span>$700</span>
+        </div>
+        <div class="total-cost">
+          <span>Total ({{adults}} travelers)</span>
+          <span>$3,500</span>
+        </div>
+        <p class="estimate-note">
+          This is an estimate. Final pricing will be confirmed by our travel specialists.
+        </p>
+      </div>
+    </div>
+  </div>
+</div> 

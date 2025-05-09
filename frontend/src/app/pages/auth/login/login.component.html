@@ -1,0 +1,43 @@
+<div class="auth-page">
+  <div class="auth-container">
+    <div class="auth-card">
+      <h1>Welcome Back!</h1>
+      <p class="subtitle">Sign in to continue your journey</p>
+
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            [(ngModel)]="loginData.email"
+            required
+            placeholder="Enter your email">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password"
+            [(ngModel)]="loginData.password"
+            required
+            placeholder="Enter your password">
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="submit-button" [disabled]="!loginForm.form.valid">
+          Sign In
+        </button>
+
+        <div class="auth-footer">
+          <p>Don't have an account? <a routerLink="/register">Sign Up</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div> 
