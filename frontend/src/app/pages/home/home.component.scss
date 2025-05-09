@@ -12,10 +12,26 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/assets/images/pattern.svg');
+    opacity: 0.1;
+    animation: float 20s linear infinite;
+  }
 
   .hero-content {
     max-width: 800px;
     width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .discover-your-dream-destination {
@@ -24,6 +40,8 @@
     font-size: 56px;
     line-height: 67.2px;
     margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
   }
 
   .hero-description {
@@ -31,6 +49,8 @@
     font-size: 18px;
     line-height: 28.8px;
     margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.3s forwards;
   }
 
   .search-bar {
@@ -41,6 +61,9 @@
     align-items: center;
     max-width: 600px;
     margin: 0 auto;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.6s forwards;
 
     .input-area {
       flex: 1;
@@ -51,6 +74,10 @@
         border: none;
         font-size: 16px;
         outline: none;
+        
+        &::placeholder {
+          color: rgba(0,0,0,0.4);
+        }
       }
     }
 
@@ -65,16 +92,37 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s;
+      transition: all 0.3s ease;
 
       &:hover {
-        transform: translateY(-2px);
+        transform: translateY(-2px) rotate(5deg);
+        background: var(--accent);
       }
 
       .search-icon {
         font-size: 20px;
       }
     }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-50%, -50%);
   }
 }
 

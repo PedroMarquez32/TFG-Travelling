@@ -1,317 +1,213 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, NavbarComponent, FooterComponent, FormsModule],
   template: `
-    <div class="contact-page">
-      <div class="hero-section">
-        <h1>Contact Us</h1>
-        <p>Get in touch with our travel experts for any questions or assistance</p>
-      </div>
-
-      <div class="content-container">
-        <div class="contact-grid">
-          <!-- Información de contacto -->
-          <div class="company-info">
-            <h2>TravelDream</h2>
-            <p class="company-description">
-              Your trusted partner in creating unforgettable travel experiences since 2020. We specialize in crafting personalized journeys that match your dreams and preferences.
-            </p>
-            
-            <div class="info-items">
-              <div class="info-item">
-                <span class="icon">📍</span>
-                <div>
-                  <h3>Visit Us</h3>
-                  <p>123 Travel Street<br>Madrid, Spain 28001</p>
-                </div>
-              </div>
-
-              <div class="info-item">
-                <span class="icon">📞</span>
-                <div>
-                  <h3>Call Us</h3>
-                  <p>+34 900 123 456<br>Mon - Fri, 9:00 - 18:00</p>
-                </div>
-              </div>
-
-              <div class="info-item">
-                <span class="icon">✉️</span>
-                <div>
-                  <h3>Email Us</h3>
-                  <p>info&#64;traveldream.com<br>We'll respond within 24h</p>
-                </div>
-              </div>
-
-              <div class="info-item">
-                <span class="icon">💬</span>
-                <div>
-                  <h3>Follow Us</h3>
-                  <div class="social-links">
-                    <a href="#" target="_blank">Facebook</a>
-                    <a href="#" target="_blank">Instagram</a>
-                    <a href="#" target="_blank">Twitter</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Formulario de contacto -->
-          <div class="contact-form-container">
-            <div class="form-card">
-              <h2>Send Us a Message</h2>
-              <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
-                <div class="form-group">
-                  <label for="name">Full Name</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name"
-                    [(ngModel)]="contactData.name"
-                    required
-                    placeholder="Enter your full name"
-                  >
-                </div>
-
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email"
-                    [(ngModel)]="contactData.email"
-                    required
-                    placeholder="Enter your email"
-                  >
-                </div>
-
-                <div class="form-group">
-                  <label for="subject">Subject</label>
-                  <select 
-                    id="subject" 
-                    name="subject"
-                    [(ngModel)]="contactData.subject"
-                    required
-                  >
-                    <option value="">Select a subject</option>
-                    <option value="booking">Booking Inquiry</option>
-                    <option value="support">Customer Support</option>
-                    <option value="partnership">Partnership</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="message">Message</label>
-                  <textarea 
-                    id="message" 
-                    name="message"
-                    [(ngModel)]="contactData.message"
-                    required
-                    rows="5"
-                    placeholder="How can we help you?"
-                  ></textarea>
-                </div>
-
-                <button 
-                  type="submit" 
-                  class="submit-button" 
-                  [disabled]="!contactForm.form.valid"
-                >
-                  Send Message
-                </button>
-              </form>
-            </div>
-          </div>
+    <app-navbar></app-navbar>
+    <div class="contact-hero">
+      <h1>Contact Us</h1>
+      <p>Get in touch with our travel experts for any questions or assistance</p>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3>TravelDream</h3>
+        <p>Your trusted partner in creating unforgettable travel experiences since 2020.</p>
+        
+        <div class="info-item">
+          <h4>Visit Us</h4>
+          <p>123 Travel Street</p>
+          <p>Madrid, Spain 28001</p>
+        </div>
+        
+        <div class="info-item">
+          <h4>Call Us</h4>
+          <p>+34 900 123 456</p>
+          <p>Mon - Fri, 9:00 - 18:00</p>
         </div>
       </div>
+
+      <div class="contact-card">
+        <h2>Send Us a Message</h2>
+        <form (ngSubmit)="onSubmit()" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" [(ngModel)]="contactData.name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" [(ngModel)]="contactData.email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" [(ngModel)]="contactData.subject" name="subject" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" [(ngModel)]="contactData.message" name="message" rows="5" required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
     </div>
+    <app-footer></app-footer>
   `,
   styles: [`
-    .contact-page {
+    :host {
+      display: flex;
+      flex-direction: column;
       min-height: 100vh;
-      background: var(--cream);
-      padding-top: 80px;
     }
 
-    .hero-section {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
-      padding: 60px 20px;
-      text-align: center;
+    .contact-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
       color: white;
+      text-align: center;
+      padding: 100px 20px;
+      margin-top: 80px;
 
       h1 {
         font-size: 48px;
-        font-weight: 700;
         margin-bottom: 16px;
       }
 
       p {
         font-size: 18px;
-        max-width: 600px;
-        margin: 0 auto;
+        opacity: 0.9;
       }
     }
 
-    .content-container {
+    .contact-container {
+      flex: 1;
+      background: var(--cream);
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 60px;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 60px 20px;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
+    .contact-info {
+      padding: 40px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 
-    .company-info {
-      h2 {
-        font-size: 32px;
-        font-weight: 700;
-        color: var(--text-dark);
+      h3 {
+        font-size: 24px;
         margin-bottom: 16px;
-      }
-
-      .company-description {
-        font-size: 16px;
-        line-height: 1.6;
         color: var(--text-dark);
-        opacity: 0.8;
-        margin-bottom: 40px;
       }
-    }
-
-    .info-items {
-      display: grid;
-      gap: 32px;
 
       .info-item {
-        display: flex;
-        gap: 16px;
-        align-items: flex-start;
+        margin-top: 32px;
 
-        .icon {
-          font-size: 24px;
-          background: rgba(77, 168, 218, 0.1);
-          width: 48px;
-          height: 48px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 12px;
-        }
-
-        h3 {
-          font-size: 18px;
-          font-weight: 600;
-          color: var(--text-dark);
+        h4 {
+          color: var(--secondary);
           margin-bottom: 8px;
         }
 
         p {
           color: var(--text-dark);
-          opacity: 0.8;
-          line-height: 1.6;
+          margin-bottom: 4px;
+        }
+      }
+    }
+
+    .contact-card {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+      animation: slideUp 0.5s ease-out;
+
+      h2 {
+        font-size: 28px;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .subtitle {
+        color: #666;
+        text-align: center;
+        margin-bottom: 32px;
+      }
+    }
+
+    .contact-form {
+      .form-group {
+        margin-bottom: 24px;
+
+        label {
+          display: block;
+          margin-bottom: 8px;
+          color: var(--text-dark);
         }
 
-        .social-links {
-          display: flex;
-          gap: 12px;
+        input, textarea {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-size: 16px;
+          transition: all 0.3s ease;
 
-          a {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 500;
-
-            &:hover {
-              text-decoration: underline;
-            }
+          &:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(77, 168, 218, 0.1);
           }
         }
-      }
-    }
 
-    .contact-form-container {
-      .form-card {
-        background: white;
-        border-radius: 24px;
-        padding: 40px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-
-        h2 {
-          font-size: 24px;
-          font-weight: 600;
-          color: var(--text-dark);
-          margin-bottom: 32px;
+        textarea {
+          resize: vertical;
         }
       }
-    }
 
-    .form-group {
-      margin-bottom: 24px;
-
-      label {
-        display: block;
-        margin-bottom: 8px;
-        color: var(--text-dark);
-        font-weight: 500;
-      }
-
-      input, select, textarea {
+      .submit-btn {
         width: 100%;
-        padding: 12px 16px;
-        border: 2px solid rgba(0,0,0,0.1);
-        border-radius: 12px;
+        padding: 14px;
+        background: var(--secondary);
+        color: white;
+        border: none;
+        border-radius: 8px;
         font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
         transition: all 0.3s ease;
 
-        &:focus {
-          outline: none;
-          border-color: var(--secondary);
-          box-shadow: 0 0 0 4px rgba(77, 168, 218, 0.1);
+        &:hover {
+          background: var(--accent);
+          transform: translateY(-2px);
         }
       }
-
-      textarea {
-        resize: vertical;
-        min-height: 120px;
-      }
     }
 
-    .submit-button {
-      width: 100%;
-      padding: 16px;
-      background: var(--secondary);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(77, 168, 218, 0.2);
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
       }
-
-      &:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-        transform: none;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .contact-grid {
-        grid-template-columns: 1fr;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   `]
@@ -325,7 +221,6 @@ export class ContactComponent {
   };
 
   onSubmit() {
-    console.log('Form submitted:', this.contactData);
-    // Aquí implementaremos la lógica de envío más adelante
+    console.log('Contact form submitted:', this.contactData);
   }
 } 

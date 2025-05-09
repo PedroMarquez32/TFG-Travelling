@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { Router } from '@angular/router';
+import { trigger, transition, style, animate, query, stagger, group } from '@angular/animations';
+import { fadeAnimation } from '../../shared/animations/route-animations';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,34 @@ import { Router } from '@angular/router';
     FooterComponent
   ],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+    fadeAnimation,
+    trigger('heroAnimation', [
+      transition(':enter', [
+        group([
+          query('.hero-content', [
+            style({ opacity: 0, transform: 'translateY(50px)' }),
+            animate('0.8s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+          ]),
+          query('.search-bar', [
+            style({ opacity: 0, transform: 'translateY(30px)' }),
+            animate('0.8s 0.3s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+          ])
+        ])
+      ])
+    ]),
+    trigger('featuredDestinations', [
+      transition(':enter', [
+        query('.destination-card', [
+          style({ opacity: 0, transform: 'translateY(30px)' }),
+          stagger(100, [
+            animate('0.6s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+          ])
+        ])
+      ])
+    ])
+  ]
 })
 export class HomeComponent {
   constructor(private router: Router) {}

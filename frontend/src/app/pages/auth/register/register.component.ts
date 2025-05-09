@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-register',
@@ -11,9 +13,11 @@ import { FooterComponent } from '../../../shared/footer/footer.component';
     CommonModule,
     RouterModule,
     FormsModule,
+    NavbarComponent,
     FooterComponent
   ],
   template: `
+    <app-navbar></app-navbar>
     <div class="auth-page">
       <div class="auth-container">
         <div class="auth-card">
@@ -75,17 +79,16 @@ import { FooterComponent } from '../../../shared/footer/footer.component';
           </form>
         </div>
       </div>
-
       <app-footer></app-footer>
     </div>
   `,
   styles: [`
     .auth-page {
+      padding-top: 80px;
       min-height: 100vh;
       background: linear-gradient(135deg, var(--cream) 0%, #fff5eb 100%);
       display: flex;
       flex-direction: column;
-      padding-top: 80px;
     }
 
     .auth-container {
@@ -93,8 +96,7 @@ import { FooterComponent } from '../../../shared/footer/footer.component';
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 80px 20px;
-      margin-top: 40px;
+      padding: 40px 20px;
     }
 
     .auth-card {
@@ -185,7 +187,21 @@ import { FooterComponent } from '../../../shared/footer/footer.component';
         }
       }
     }
-  `]
+  `],
+  animations: [
+    trigger('registerAnimation', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('0.5s ease-out', style({ opacity: 1 })),
+        query('form > *', [
+          style({ opacity: 0, transform: 'translateX(-20px)' }),
+          stagger(80, [
+            animate('0.4s ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class RegisterComponent {
   registerData = {

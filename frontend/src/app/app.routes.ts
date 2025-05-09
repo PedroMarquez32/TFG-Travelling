@@ -1,32 +1,56 @@
 import { Routes } from '@angular/router';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminLayoutComponent } from './pages/admin/admin-layout.component';
-import { AdminDashboardComponent } from './pages/admin/admin-dashboard.component';
+import { HomeComponent } from './pages/home/home.component';
+import { DestinationsComponent } from './pages/destinations/destinations.component';
+import { CustomTripComponent } from './pages/custom-trip/custom-trip.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { RegisterComponent } from './pages/auth/register/register.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { AdminDashboardComponent } from './pages/admin/dashboard/admin-dashboard.component';
+import { AdminDestinationsComponent } from './pages/admin/destinations/admin-destinations.component';
+import { DestinationDetailsComponent } from './pages/destination-details/destination-details.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
-  { path: 'destinations', loadComponent: () => import('./pages/destinations/destinations.component').then(m => m.DestinationsComponent) },
-  { path: 'destinations/:id', loadComponent: () => import('./pages/destination-details/destination-details.component').then(m => m.DestinationDetailsComponent) },
   {
-    path: 'profile',
-    loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent)
+    path: '',
+    component: HomeComponent,
+    data: { animation: 'home' }
+  },
+  {
+    path: 'destinations',
+    children: [
+      {
+        path: '',
+        component: DestinationsComponent,
+        data: { animation: 'destinations' }
+      },
+      {
+        path: ':id',
+        component: DestinationDetailsComponent,
+        data: { animation: 'destination-details' }
+      }
+    ]
+  },
+  {
+    path: 'custom-trip',
+    component: CustomTripComponent,
+    data: { animation: 'custom-trip' }
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)
+    component: LoginComponent,
+    data: { animation: 'login' }
   },
   {
     path: 'register',
-    loadComponent: () => import('./pages/auth/register/register.component').then(m => m.RegisterComponent)
-  },
-  { 
-    path: 'custom-trip', 
-    loadComponent: () => import('./pages/custom-trip/custom-trip.component').then(m => m.CustomTripComponent) 
+    component: RegisterComponent,
+    data: { animation: 'register' }
   },
   {
     path: 'contact',
-    loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent)
+    component: ContactComponent,
+    data: { animation: 'contact' }
   },
   {
     path: 'admin',
@@ -35,17 +59,21 @@ export const routes: Routes = [
     children: [
       {
         path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
         component: AdminDashboardComponent
+      },
+      {
+        path: 'destinations',
+        component: AdminDestinationsComponent
       },
       {
         path: 'users',
         loadComponent: () => import('./pages/admin/users/admin-users.component')
           .then(m => m.AdminUsersComponent)
-      },
-      {
-        path: 'destinations',
-        loadComponent: () => import('./pages/admin/destinations/admin-destinations.component')
-          .then(m => m.AdminDestinationsComponent)
       },
       {
         path: 'bookings',
@@ -68,5 +96,9 @@ export const routes: Routes = [
           .then(m => m.AdminSettingsComponent)
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];

@@ -1,188 +1,191 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, NavbarComponent, RouterModule, FormsModule],
   template: `
-    <div class="auth-page">
-      <div class="auth-container">
-        <div class="auth-card">
-          <h1>Welcome Back!</h1>
-          <p class="subtitle">Sign in to continue your journey</p>
-
-          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email"
-                [(ngModel)]="loginData.email"
-                required
-                placeholder="Enter your email">
-            </div>
-
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input 
-                type="password" 
-                id="password" 
-                name="password"
-                [(ngModel)]="loginData.password"
-                required
-                placeholder="Enter your password">
-              <a href="#" class="forgot-password">Forgot password?</a>
-            </div>
-
-            <button type="submit" class="submit-button" [disabled]="!loginForm.form.valid">
-              Sign In
-            </button>
-
-            <div class="auth-footer">
-              <p>Don't have an account? <a routerLink="/register">Sign Up</a></p>
-            </div>
-          </form>
-        </div>
+    <app-navbar></app-navbar>
+    <div class="auth-container">
+      <div class="auth-card">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Please login to your account</p>
+        
+        <form (ngSubmit)="onSubmit()" class="auth-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" [(ngModel)]="loginData.email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" [(ngModel)]="loginData.password" name="password" required>
+          </div>
+          
+          <div class="form-actions">
+            <label class="remember-me">
+              <input type="checkbox">
+              <span>Remember me</span>
+            </label>
+            <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+          </div>
+          
+          <button type="submit" class="submit-btn">Login</button>
+          
+          <p class="register-link">
+            Don't have an account? <a routerLink="/register">Register</a>
+          </p>
+        </form>
       </div>
     </div>
   `,
   styles: [`
-    .auth-page {
-      min-height: 100vh;
-      background: linear-gradient(135deg, var(--cream) 0%, #fff5eb 100%);
-      display: flex;
-      flex-direction: column;
-      padding-top: 80px;
-    }
-
     .auth-container {
-      flex: 1;
+      min-height: calc(100vh - 80px);
+      padding: 100px 24px 40px;
+      background: var(--cream);
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 80px 20px;
-      margin-top: 40px;
+      align-items: center;
     }
 
     .auth-card {
-      background: var(--white);
-      border-radius: 32px;
-      padding: 48px;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       width: 100%;
-      max-width: 520px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      max-width: 400px;
+      animation: slideUp 0.5s ease-out;
 
-      h1 {
-        font-size: 36px;
-        font-weight: 700;
+      h2 {
+        font-size: 28px;
         color: var(--text-dark);
-        margin-bottom: 12px;
+        margin-bottom: 8px;
         text-align: center;
       }
 
       .subtitle {
-        font-size: 16px;
-        color: var(--text-dark);
-        opacity: 0.7;
+        color: #666;
         text-align: center;
-        margin-bottom: 48px;
-      }
-
-      .form-group {
         margin-bottom: 32px;
+      }
+    }
+
+    .auth-form {
+      .form-group {
+        margin-bottom: 24px;
 
         label {
           display: block;
-          margin-bottom: 12px;
+          margin-bottom: 8px;
           color: var(--text-dark);
-          font-weight: 600;
-          font-size: 15px;
         }
 
         input {
           width: 100%;
-          padding: 16px 20px;
-          border: 2px solid rgba(0, 0, 0, 0.08);
-          border-radius: 16px;
+          padding: 12px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
           font-size: 16px;
           transition: all 0.3s ease;
-          background: #fafafa;
 
           &:focus {
             outline: none;
             border-color: var(--secondary);
-            background: white;
-            box-shadow: 0 4px 12px rgba(77, 168, 218, 0.08);
+            box-shadow: 0 0 0 2px rgba(77, 168, 218, 0.1);
           }
+        }
+      }
 
-          &::placeholder {
-            color: rgba(0, 0, 0, 0.4);
-          }
+      .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+
+        .remember-me {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
         }
 
         .forgot-password {
-          display: block;
-          text-align: right;
           color: var(--secondary);
           text-decoration: none;
-          font-size: 14px;
-          margin-top: 12px;
-          font-weight: 500;
-
+          
           &:hover {
             text-decoration: underline;
           }
         }
       }
 
-      .submit-button {
+      .submit-btn {
         width: 100%;
-        padding: 18px;
+        padding: 14px;
         background: var(--secondary);
-        color: var(--white);
+        color: white;
         border: none;
-        border-radius: 16px;
+        border-radius: 8px;
         font-size: 16px;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 8px;
 
         &:hover {
+          background: var(--accent);
           transform: translateY(-2px);
-          box-shadow: 0 8px 16px rgba(77, 168, 218, 0.2);
-        }
-
-        &:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-          transform: none;
         }
       }
 
-      .auth-footer {
-        margin-top: 32px;
+      .register-link {
         text-align: center;
-        color: var(--text-dark);
-        font-size: 15px;
+        margin-top: 24px;
+        color: #666;
 
         a {
           color: var(--secondary);
           text-decoration: none;
           font-weight: 600;
-          margin-left: 4px;
-
+          
           &:hover {
             text-decoration: underline;
           }
         }
       }
     }
-  `]
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `],
+  animations: [
+    trigger('formAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-20px)' }),
+        animate('0.5s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+        query('form > *', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(50, [
+            animate('0.3s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+          ])
+        ])
+      ])
+    ])
+  ]
 })
 export class LoginComponent {
   loginData = {

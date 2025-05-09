@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-finances',
@@ -70,6 +71,14 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
   `,
+  animations: [
+    trigger('fadeSlideIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ],
   styles: [`
     .finances-content {
       padding: 24px;
@@ -111,9 +120,8 @@ import { CommonModule } from '@angular/common';
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 24px;
-      margin-bottom: 40px;
     }
 
     .stat-card {
@@ -121,6 +129,7 @@ import { CommonModule } from '@angular/common';
       padding: 24px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
 
       h3 {
         margin: 0;
@@ -138,6 +147,7 @@ import { CommonModule } from '@angular/common';
           font-size: 32px;
           font-weight: 600;
           color: var(--primary);
+          transition: color 0.3s ease;
         }
 
         .trend {
@@ -153,6 +163,11 @@ import { CommonModule } from '@angular/common';
         margin: 0;
         font-size: 14px;
         color: #666;
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       }
     }
 
@@ -191,6 +206,32 @@ import { CommonModule } from '@angular/common';
           &.completed { background: #e6f4ea; color: #1e8e3e; }
           &.pending { background: #fef7e0; color: #b17900; }
           &.failed { background: #fce8e6; color: #d93025; }
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .period-selector {
+        width: 100%;
+        overflow-x: auto;
+        
+        button {
+          flex: 1;
+          white-space: nowrap;
+        }
+      }
+
+      .transactions-table {
+        display: block;
+        overflow-x: auto;
+        
+        th, td {
+          min-width: 120px;
         }
       }
     }

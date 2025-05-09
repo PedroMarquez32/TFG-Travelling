@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-reviews',
@@ -50,6 +51,18 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
   `,
+  animations: [
+    trigger('reviewAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateX(-20px)' }),
+          stagger(100, [
+            animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ],
   styles: [`
     .reviews-content {
       padding: 24px;
@@ -76,7 +89,7 @@ import { CommonModule } from '@angular/common';
 
     .reviews-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 24px;
     }
 
@@ -85,6 +98,12 @@ import { CommonModule } from '@angular/common';
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      }
 
       .review-header {
         display: flex;
@@ -158,6 +177,11 @@ import { CommonModule } from '@angular/common';
           border-radius: 6px;
           cursor: pointer;
           font-weight: 500;
+          transition: all 0.3s ease;
+          
+          &:hover {
+            transform: scale(1.05);
+          }
         }
 
         .approve-btn {
@@ -174,6 +198,23 @@ import { CommonModule } from '@angular/common';
           background: #fce8e6;
           color: #d93025;
         }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+        
+        .filter-select {
+          width: 100%;
+        }
+      }
+
+      .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
       }
     }
   `]

@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-custom-trip',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent, FooterComponent],
   templateUrl: './custom-trip.component.html',
   styles: [`
     .custom-trip-page {
-      min-height: 100vh;
+      min-height: calc(100vh - 160px);
       background: var(--cream);
-      padding-top: 80px;
+      padding: 0;
     }
 
     .hero-section {
@@ -19,6 +21,7 @@ import { FormsModule } from '@angular/forms';
       padding: 60px 20px;
       text-align: center;
       color: white;
+      margin-top: 80px;
 
       h1 {
         font-size: 48px;

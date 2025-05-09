@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-destinations',
@@ -53,6 +54,18 @@ import { FormsModule } from '@angular/forms';
       </div>
     </div>
   `,
+  animations: [
+    trigger('cardAnimation', [
+      transition('* => *', [
+        query(':enter', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(100, [
+            animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ],
   styles: [`
     .admin-destinations {
       .page-header {
@@ -84,6 +97,7 @@ import { FormsModule } from '@angular/forms';
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 24px;
+        animation: fadeIn 0.3s ease-in;
       }
 
       .destination-card {
@@ -91,6 +105,7 @@ import { FormsModule } from '@angular/forms';
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
 
         img {
           width: 100%;
@@ -148,7 +163,37 @@ import { FormsModule } from '@angular/forms';
             }
           }
         }
+
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
       }
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+        
+        button {
+          width: 100%;
+        }
+      }
+
+      .search-filters {
+        flex-direction: column;
+        gap: 12px;
+        
+        input, select {
+          width: 100%;
+        }
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   `]
 })

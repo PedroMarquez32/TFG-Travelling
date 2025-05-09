@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-settings',
@@ -88,6 +89,14 @@ import { FormsModule } from '@angular/forms';
       </div>
     </div>
   `,
+  animations: [
+    trigger('settingAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ],
   styles: [`
     .settings-content {
       padding: 24px;
@@ -131,11 +140,17 @@ import { FormsModule } from '@angular/forms';
       border-radius: 12px;
       padding: 24px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
 
       h2 {
         margin: 0 0 24px;
         font-size: 18px;
         color: var(--primary);
+      }
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       }
     }
 
@@ -155,10 +170,13 @@ import { FormsModule } from '@angular/forms';
         border: 1px solid #ddd;
         border-radius: 6px;
         font-size: 14px;
+        transition: all 0.3s ease;
 
         &:focus {
           outline: none;
           border-color: var(--secondary);
+          transform: scale(1.02);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
       }
     }
@@ -202,7 +220,7 @@ import { FormsModule } from '@angular/forms';
         right: 0;
         bottom: 0;
         background-color: #ccc;
-        transition: .4s;
+        transition: all 0.3s ease;
         border-radius: 34px;
 
         &:before {
@@ -213,9 +231,28 @@ import { FormsModule } from '@angular/forms';
           left: 4px;
           bottom: 4px;
           background-color: white;
-          transition: .4s;
+          transition: all 0.3s ease;
           border-radius: 50%;
         }
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page-header {
+        flex-direction: column;
+        gap: 16px;
+        
+        .save-btn {
+          width: 100%;
+        }
+      }
+
+      .settings-section {
+        padding: 16px;
+      }
+
+      .setting-item {
+        margin-bottom: 16px;
       }
     }
   `]
