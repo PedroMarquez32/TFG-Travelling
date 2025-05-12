@@ -1,0 +1,614 @@
+.user-profile-page {
+  background: #f6e7d7;
+  min-height: 100vh;
+  padding-top: 80px;
+  
+  .profile-header {
+    background: linear-gradient(270deg, rgba(77, 168, 218, 1) 0%, rgba(61, 191, 188, 1) 100%);
+    padding: 40px;
+    color: white;
+    position: relative;
+    z-index: 1;
+
+    .profile-info {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+
+      .avatar-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+
+        .large-avatar {
+          width: 120px;
+          height: 120px;
+          background: #ff6b6b;
+          border-radius: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 40px;
+          font-weight: 700;
+        }
+
+        .edit-avatar-button {
+          background: rgba(255, 255, 255, 0.5);
+          border: none;
+          border-radius: 16px;
+          padding: 8px 12px;
+          color: white;
+          font-size: 12px;
+          cursor: pointer;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.7);
+          }
+        }
+      }
+
+      .user-info {
+        flex: 1;
+
+        h2 {
+          font-size: 32px;
+          margin: 0 0 8px 0;
+        }
+
+        .member-since {
+          font-size: 16px;
+          margin: 0 0 16px 0;
+          opacity: 0.9;
+        }
+
+        .user-stats {
+          display: flex;
+          gap: 24px;
+
+          .stat-1, .stat-2, .stat-3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+
+            i {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+
+      .edit-profile-button {
+        background: white;
+        color: #3dbfbc;
+        border: none;
+        border-radius: 22px;
+        padding: 12px 24px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.9);
+        }
+      }
+    }
+  }
+
+  .main-content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 80px;
+
+    .tab-navigation {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #E5E7EB;
+
+      > div {
+        padding-bottom: 16px;
+        cursor: pointer;
+        position: relative;
+        color: #6b7280;
+        font-weight: 600;
+
+        &.active {
+          color: #4da8da;
+
+          .active-indicator {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #4da8da;
+            border-radius: 1.5px;
+          }
+        }
+      }
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+
+      h2 {
+        font-size: 32px;
+        color: #3a3a3c;
+        font-weight: 700;
+      }
+
+      .filter-dropdown {
+        background: white;
+        border: 1px solid #E5E7EB;
+        border-radius: 22px;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+
+        &:hover {
+          background: #f8f9fa;
+        }
+      }
+    }
+
+    .upcoming-trip {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0px 4px 20px rgba(58, 58, 60, 0.13);
+      margin-bottom: 40px;
+
+      .trip-header {
+        background: #4da8da;
+        padding: 0 24px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+
+        h3 {
+          font-size: 18px;
+          font-weight: 700;
+        }
+
+        .trip-status {
+          background: white;
+          color: #4da8da;
+          padding: 8px 16px;
+          border-radius: 16px;
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+
+      .trip-content {
+        display: flex;
+
+        .trip-image {
+          width: 300px;
+          height: 220px;
+          position: relative;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+
+            h3 {
+              color: white;
+              font-size: 24px;
+              margin: 0;
+            }
+          }
+        }
+
+        .trip-details {
+          flex: 1;
+          padding: 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .trip-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            > div {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              color: #3a3a3c;
+
+              i {
+                color: #4da8da;
+              }
+            }
+          }
+
+          .trip-actions {
+            display: flex;
+            gap: 16px;
+
+            button {
+              padding: 12px 24px;
+              border-radius: 22px;
+              font-weight: 600;
+
+              &.view-details-button {
+                background: #3dbfbc;
+                color: white;
+              }
+
+              &.modify-button {
+                border: 1px solid #3dbfbc;
+                color: #3dbfbc;
+              }
+            }
+          }
+
+          .countdown-timer {
+            .your-trip-starts-in {
+              color: #6b7280;
+              margin-bottom: 8px;
+            }
+
+            .timer-display {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+
+              .timer-unit {
+                text-align: center;
+
+                .number {
+                  color: #ff6b6b;
+                  font-size: 20px;
+                  font-weight: 700;
+                }
+
+                .label {
+                  color: #6b7280;
+                  font-size: 12px;
+                }
+              }
+
+              .separator {
+                color: #ff6b6b;
+                font-size: 20px;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .past-trips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+
+      .past-trip-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0px 4px 20px rgba(58, 58, 60, 0.13);
+
+        .trip-image {
+          height: 200px;
+          position: relative;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .image-overlay2 {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+
+            h3 {
+              color: white;
+              font-size: 24px;
+              margin: 0;
+            }
+          }
+        }
+
+        .trip-content2 {
+          padding: 24px;
+
+          .trip-dates {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #3a3a3c;
+            margin-bottom: 16px;
+
+            i {
+              color: #4da8da;
+            }
+          }
+
+          .description {
+            color: #3a3a3c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+          }
+
+          .trip-actions2 {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+
+            button {
+              flex: 1;
+              padding: 12px 0;
+              border-radius: 22px;
+              font-weight: 600;
+
+              &.view-photos-button {
+                border: 1px solid #3dbfbc;
+                color: #3dbfbc;
+              }
+
+              &.write-review-button {
+                background: #3dbfbc;
+                color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .recommendations-section {
+    margin-top: 60px;
+
+    h2 {
+      font-size: 32px;
+      color: #3a3a3c;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      color: #3a3a3c;
+      margin-bottom: 24px;
+    }
+
+    .recommendations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 24px;
+
+      .recommendation-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0px 4px 20px rgba(58, 58, 60, 0.13);
+
+        .rec-image {
+          height: 250px;
+          position: relative;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .image-overlay3 {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(270deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+            padding: 24px;
+
+            .favorite-button {
+              position: absolute;
+              top: 20px;
+              right: 20px;
+              width: 40px;
+              height: 40px;
+              background: white;
+              border: none;
+              border-radius: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+
+              i {
+                color: #ff6b6b;
+              }
+            }
+
+            h3 {
+              position: absolute;
+              bottom: 24px;
+              color: white;
+              font-size: 24px;
+              margin: 0;
+            }
+          }
+        }
+
+        .card-content {
+          padding: 24px;
+
+          .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+
+            .duration, .rating {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              color: #3a3a3c;
+
+              i {
+                color: #4da8da;
+              }
+
+              .reviews {
+                color: #6b7280;
+              }
+            }
+          }
+
+          .description {
+            color: #3a3a3c;
+            margin-bottom: 24px;
+            line-height: 1.5;
+          }
+
+          .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .price-info {
+              .from {
+                color: #6b7280;
+                font-size: 14px;
+              }
+
+              .price {
+                color: #4da8da;
+                font-size: 24px;
+                font-weight: 700;
+              }
+            }
+
+            .view-button {
+              background: #3dbfbc;
+              color: white;
+              border: none;
+              border-radius: 22px;
+              padding: 12px 24px;
+              font-weight: 600;
+              cursor: pointer;
+
+              &:hover {
+                background: darken(#3dbfbc, 5%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .user-profile-page {
+    .main-content {
+      padding: 40px 20px;
+    }
+
+    .profile-info {
+      flex-direction: column;
+      text-align: center;
+
+      .user-stats {
+        justify-content: center;
+      }
+    }
+
+    .recommendations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-header .profile-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    .avatar {
+      margin: 0 0 24px 0;
+    }
+
+    .user-details .stats {
+      justify-content: center;
+    }
+
+    .edit-profile-button {
+      margin-top: 24px;
+    }
+  }
+
+  .trip-card {
+    flex-direction: column;
+
+    .trip-image {
+      width: 100% !important;
+      height: 200px !important;
+    }
+
+    .trip-details .trip-info {
+      grid-template-columns: 1fr !important;
+    }
+
+    .actions {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Estilos para botones Material
+.mat-button, .mat-raised-button, .mat-stroked-button {
+  font-family: "Montserrat-SemiBold", sans-serif;
+  font-size: 14px;
+  line-height: 16.8px;
+  font-weight: 600;
+}
+
+.view-details-button {
+  background: #3dbfbc;
+  color: #ffffff;
+  &:hover {
+    background: darken(#3dbfbc, 10%);
+  }
+}
+
+.modify-button {
+  border-color: #3dbfbc;
+  color: #3dbfbc;
+  &:hover {
+    background: rgba(61, 191, 188, 0.1);
+  }
+} 

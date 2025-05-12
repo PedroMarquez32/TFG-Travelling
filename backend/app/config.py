@@ -11,13 +11,13 @@ class Settings(BaseSettings):
     POSTGRES_DB: str
     
     # JWT settings
-    SECRET_KEY: str
-    ALGORITHM: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    SECRET_KEY: str = "your-secret-key-here"  # Cambia esto en producción
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
     
     # CORS settings
-    CORS_ORIGINS: List[str] = ["*"]
+    CORS_ORIGINS: List[str] = ["http://localhost:4200"]  # Añade específicamente tu frontend
     
     class Config:
         env_file = ".env"

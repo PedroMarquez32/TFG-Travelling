@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -211,8 +212,21 @@ export class RegisterComponent {
     confirmPassword: ''
   };
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   onSubmit() {
-    console.log('Register attempt:', this.registerData);
-    // Aquí implementaremos la lógica de registro más adelante
+    if (this.registerData.password !== this.registerData.confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    this.authService.register(this.registerData).subscribe({
+      next: () => {
+        alert('Registration successful!');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        alert('Registration failed: ' + (err.error.detail || 'Unknown error'));
+      }
+    });
   }
 } 

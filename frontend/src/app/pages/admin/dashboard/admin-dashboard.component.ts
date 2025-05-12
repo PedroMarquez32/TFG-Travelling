@@ -7,9 +7,9 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <div class="dashboard">
-      <header class="dashboard-header">
-        <div class="header-left">
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <div class="header-title">
           <h1>Dashboard</h1>
           <p>Welcome back, John! Here's what's happening today.</p>
         </div>
@@ -18,61 +18,58 @@ import { RouterModule } from '@angular/router';
             <i class="fas fa-search"></i>
             <input type="text" placeholder="Search...">
           </div>
-          <a routerLink="/" class="back-button">
-            <i class="fas fa-home"></i>
-            <span>Back to Site</span>
-          </a>
-        </div>
-      </header>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-header">
-            <h3>Total Users</h3>
-            <div class="stat-icon blue">
-              <i class="fas fa-users"></i>
-            </div>
-          </div>
-          <div class="stat-value">12,486</div>
-          <div class="stat-trend positive">
-            <span>+12.5%</span> vs last month
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-header">
-            <h3>Active Bookings</h3>
-            <div class="stat-icon green">
-              <i class="fas fa-calendar-check"></i>
-            </div>
-          </div>
-          <div class="stat-value">1,843</div>
-          <div class="stat-trend positive">
-            <span>+8.2%</span> vs last month
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-header">
-            <h3>Monthly Revenue</h3>
-            <div class="stat-icon coral">
-              <i class="fas fa-dollar-sign"></i>
-            </div>
-          </div>
-          <div class="stat-value">$248,320</div>
-          <div class="stat-trend positive">
-            <span>+18.3%</span> vs last month
+          <div class="header-icons">
+            <i class="fas fa-bell"></i>
+            <i class="fas fa-question-circle"></i>
           </div>
         </div>
       </div>
 
-      <div class="dashboard-grid">
+      <div class="stats-cards">
+        <div class="stat-card">
+          <h3>Total Users</h3>
+          <div class="stat-content">
+            <div class="stat-info">
+              <div class="stat-value">12,486</div>
+              <div class="stat-change positive">+12.5% vs last month</div>
+            </div>
+            <div class="stat-icon users">
+              <i class="fas fa-users"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h3>Active Bookings</h3>
+          <div class="stat-content">
+            <div class="stat-info">
+              <div class="stat-value">1,843</div>
+              <div class="stat-change positive">+8.2% vs last month</div>
+            </div>
+            <div class="stat-icon bookings">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h3>Monthly Revenue</h3>
+          <div class="stat-content">
+            <div class="stat-info">
+              <div class="stat-value">$248,320</div>
+              <div class="stat-change positive">+18.3% vs last month</div>
+            </div>
+            <div class="stat-icon revenue">
+              <i class="fas fa-dollar-sign"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-content">
         <div class="chart-section">
           <div class="section-header">
-            <div class="section-title">
-              <i class="fas fa-chart-line"></i>
-              <h2>Bookings Overview</h2>
-            </div>
+            <h2>Bookings Overview</h2>
             <select>
               <option>Last 30 days</option>
               <option>Last 60 days</option>
@@ -80,47 +77,43 @@ import { RouterModule } from '@angular/router';
             </select>
           </div>
           <div class="chart">
-            <!-- Chart will be added here -->
+            <!-- Aquí irá el gráfico -->
           </div>
         </div>
 
-        <div class="popular-destinations">
+        <div class="destinations-section">
           <div class="section-header">
-            <div class="section-title">
-              <i class="fas fa-map-marker-alt"></i>
-              <h2>Popular Destinations</h2>
-            </div>
-            <a href="#" class="view-all">
-              View All
-              <i class="fas fa-arrow-right"></i>
-            </a>
+            <h2>Popular Destinations</h2>
+            <a href="#" class="view-all">View All</a>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Destination</th>
-                <th>Bookings</th>
-                <th>Revenue</th>
-                <th>Rating</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>
-                  <div class="destination-info">
-                    <img src="assets/images/santorini.jpg" alt="Santorini">
-                    <span>Santorini, Greece</span>
-                  </div>
-                </td>
-                <td>342</td>
-                <td>$498,200</td>
-                <td>4.9 ⭐</td>
-              </tr>
-              <!-- Más destinos aquí -->
-            </tbody>
-          </table>
+          <div class="destinations-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Destination</th>
+                  <th>Bookings</th>
+                  <th>Revenue</th>
+                  <th>Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>
+                    <div class="destination-info">
+                      <img src="assets/images/santorini.jpg" alt="Santorini">
+                      <span>Santorini, Greece</span>
+                    </div>
+                  </td>
+                  <td>342</td>
+                  <td>$498,200</td>
+                  <td>4.9 ⭐</td>
+                </tr>
+                <!-- Más destinos aquí -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -133,14 +126,14 @@ import { RouterModule } from '@angular/router';
         </div>
         <div class="activity-list">
           <div class="activity-item">
-            <div class="activity-icon user">
+            <div class="activity-icon">
               <i class="fas fa-user"></i>
             </div>
             <div class="activity-content">
               <p>New user registered</p>
               <span>Emma Thompson created a new account</span>
             </div>
-            <span class="activity-time">30 min ago</span>
+            <span class="activity-time">10 min ago</span>
           </div>
           <!-- Más actividades aquí -->
         </div>
@@ -148,33 +141,29 @@ import { RouterModule } from '@angular/router';
     </div>
   `,
   styles: [`
-    .dashboard {
-      padding: 32px;
+    .dashboard-container {
+      padding: 24px;
+      height: calc(100vh - 48px);
+      overflow-y: auto;
       background: #f8f9fa;
-      max-width: 1600px;
-      margin: 0 auto;
     }
 
     .dashboard-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
+    }
 
-      .header-left {
-        h1 {
-          font-size: 28px;
-          font-weight: 600;
-          color: #1a2233;
-          margin: 0;
-        }
+    .header-title h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #1a2233;
+    }
 
-        p {
-          color: #64748b;
-          margin: 8px 0 0;
-          font-size: 16px;
-        }
-      }
+    .header-title p {
+      margin: 4px 0 0;
+      color: #64748b;
     }
 
     .header-actions {
@@ -183,198 +172,184 @@ import { RouterModule } from '@angular/router';
       align-items: center;
     }
 
-    .back-button {
+    .search-bar {
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: #fff;
-      border: 1px solid #e2e8f0;
+      background: white;
       border-radius: 8px;
-      color: #64748b;
-      text-decoration: none;
-      transition: all 0.2s;
-
-      &:hover {
-        background: #f8fafc;
-        color: #1a2233;
-      }
-
-      i {
-        font-size: 16px;
-      }
-
-      span {
-        font-size: 14px;
-        font-weight: 500;
-      }
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      i {
-        color: #64748b;
-        font-size: 20px;
-      }
-
-      h2 {
-        font-size: 20px;
-        color: #1a2233;
-        margin: 0;
-      }
-    }
-
-    .view-all {
-      display: flex;
-      align-items: center;
+      padding: 8px 16px;
       gap: 8px;
-      color: #3b82f6;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-
-      i {
-        font-size: 12px;
-      }
-
-      &:hover {
-        text-decoration: underline;
+      
+      input {
+        border: none;
+        outline: none;
+        width: 200px;
       }
     }
 
-    .stats-grid {
+    .stats-cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 24px;
       margin-bottom: 24px;
     }
 
     .stat-card {
       background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      height: 100%;
-      min-height: 160px;
+      border-radius: 12px;
+      padding: 20px;
+      
+      h3 {
+        margin: 0;
+        color: #64748b;
+        font-size: 14px;
+      }
 
-      .stat-header {
+      .stat-content {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 16px;
-
-        h3 {
-          color: #64748b;
-          font-size: 16px;
-          margin: 0;
-        }
-
-        .stat-icon {
-          width: 40px;
-          height: 40px;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          i {
-            color: white;
-            font-size: 20px;
-          }
-
-          &.blue { background: #3b82f6; }
-          &.green { background: #10b981; }
-          &.coral { background: #f43f5e; }
-        }
+        margin-top: 16px;
       }
 
       .stat-value {
-        font-size: 32px;
+        font-size: 28px;
         font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 8px;
+        color: #1a2233;
       }
 
-      .stat-trend {
+      .stat-change {
         font-size: 14px;
-        color: #64748b;
+        &.positive { color: #10b981; }
+      }
 
-        span {
-          color: #10b981;
-          font-weight: 500;
+      .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        i {
+          color: white;
+          font-size: 20px;
         }
+
+        &.users { background: #3b82f6; }
+        &.bookings { background: #10b981; }
+        &.revenue { background: #f43f5e; }
       }
     }
 
-    .dashboard-grid {
+    .dashboard-content {
       display: grid;
       grid-template-columns: 1.5fr 1fr;
       gap: 24px;
       margin-bottom: 24px;
     }
 
-    .chart-section, .popular-destinations {
+    .chart-section, .destinations-section {
       background: white;
-      padding: 24px;
-      border-radius: 16px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      height: 100%;
-      min-height: 400px;
+      border-radius: 12px;
+      padding: 20px;
     }
 
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
 
       h2 {
-        font-size: 18px;
-        color: #1e293b;
         margin: 0;
+        font-size: 18px;
+        color: #1a2233;
       }
+    }
 
-      select {
-        padding: 8px 12px;
-        border: 1px solid #e2e8f0;
+    .destinations-table {
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        
+        th, td {
+          padding: 12px;
+          text-align: left;
+          border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+          color: #64748b;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .destination-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      img {
+        width: 32px;
+        height: 32px;
         border-radius: 6px;
-        color: #64748b;
+        object-fit: cover;
       }
     }
 
-    .chart {
-      height: 350px;
-      background: #f8fafc;
+    .recent-activity {
+      background: white;
       border-radius: 12px;
-      margin-top: 24px;
-    }
+      padding: 20px;
 
-    @media (max-width: 1400px) {
-      .dashboard {
-        padding: 24px;
+      .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
       }
 
-      .dashboard-grid {
+      .activity-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        transition: background 0.2s;
+
+        &:hover {
+          background: #f8f9fa;
+        }
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .dashboard-content {
         grid-template-columns: 1fr;
-        gap: 24px;
       }
     }
 
     @media (max-width: 768px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
       }
 
       .header-actions {
-        flex-direction: column;
-        align-items: stretch;
+        width: 100%;
       }
 
       .search-bar {
-        width: 100%;
+        flex: 1;
+        input {
+          width: 100%;
+        }
+      }
+
+      .stats-cards {
+        grid-template-columns: 1fr;
       }
     }
   `]

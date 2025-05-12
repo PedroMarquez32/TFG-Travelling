@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -193,8 +194,18 @@ export class LoginComponent {
     password: ''
   };
 
+  constructor(private authService: AuthService, private router: Router) {}
+
   onSubmit() {
-    console.log('Login attempt:', this.loginData);
-    // Aquí implementaremos la lógica de login más adelante
+    this.authService.login(this.loginData).subscribe({
+      next: (res: any) => {
+        console.log('Login successful:', res);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Login error:', err);
+        alert('Login failed: ' + (err.error?.detail || 'Unknown error'));
+      }
+    });
   }
 } 

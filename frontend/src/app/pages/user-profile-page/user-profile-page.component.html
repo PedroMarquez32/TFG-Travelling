@@ -1,0 +1,203 @@
+<div class="user-profile-page">
+  <app-navbar></app-navbar>
+  
+  <div class="profile-header">
+    <div class="profile-info">
+      <div class="avatar-section">
+        <div class="large-avatar">
+          <div class="ar2">{{ user?.fullName | userInitials }}</div>
+        </div>
+        <button class="edit-avatar-button">
+          <span class="edit-photo">Edit Photo</span>
+        </button>
+      </div>
+      
+      <div class="user-info">
+        <h2 class="ana-rodr-guez">{{ user?.fullName }}</h2>
+        <p class="member-since-june-2022">Member since {{ user?.createdAt | date:'MMMM yyyy' }}</p>
+        <div class="user-stats">
+          <div class="stat-1">
+            <i class="fas fa-suitcase"></i>
+            <span>{{ tripsCompleted }} Trips Completed</span>
+          </div>
+          <div class="stat-2">
+            <i class="fas fa-heart"></i>
+            <span>{{ favorites }} Favorites</span>
+          </div>
+          <div class="stat-3">
+            <i class="fas fa-star"></i>
+            <span>{{ reviews }} Reviews</span>
+          </div>
+        </div>
+      </div>
+      
+      <button mat-raised-button class="edit-profile-button" (click)="editProfile()">
+        Edit Profile
+      </button>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="tab-navigation">
+      <div class="tab-1" [class.active]="activeTab === 'trips'">
+        <span class="my-trips">My Trips</span>
+        <div class="active-indicator"></div>
+      </div>
+      <div class="tab-2">
+        <span class="favorites">Favorites</span>
+      </div>
+      <div class="tab-3">
+        <span class="reviews">Reviews</span>
+      </div>
+    </div>
+
+    <div class="trips-section">
+      <div class="section-header">
+        <h2 class="my-trips2">My Trips</h2>
+        <div class="filter-dropdown">
+          <span class="all-trips">All Trips</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <div class="upcoming-trip" *ngIf="upcomingTrips.length > 0">
+        <div class="trip-header">
+          <h3 class="upcoming-trip2">Upcoming Trip</h3>
+          <div class="trip-status">
+            <span class="confirmed">{{ upcomingTrips[0].status }}</span>
+          </div>
+        </div>
+        
+        <div class="trip-content">
+          <div class="trip-image">
+            <img [src]="upcomingTrips[0].imageUrl" [alt]="upcomingTrips[0].destination">
+            <div class="image-overlay">
+              <h3 class="destination">{{ upcomingTrips[0].destination }}</h3>
+            </div>
+          </div>
+          
+          <div class="trip-details">
+            <div class="trip-info">
+              <div class="trip-dates">
+                <i class="fas fa-calendar"></i>
+                <span>{{ upcomingTrips[0].startDate | date }} - {{ upcomingTrips[0].endDate | date }}</span>
+              </div>
+              <div class="trip-guests">
+                <i class="fas fa-user"></i>
+                <span>{{ upcomingTrips[0].travelers }} Adults</span>
+              </div>
+              <div class="trip-booking-id">
+                <i class="fas fa-bookmark"></i>
+                <span>Booking ID: {{ upcomingTrips[0].bookingId }}</span>
+              </div>
+            </div>
+
+            <div class="trip-actions">
+              <button mat-raised-button class="view-details-button" (click)="viewTripDetails(upcomingTrips[0].id)">
+                View Details
+              </button>
+              <button mat-stroked-button class="modify-button" (click)="modifyTrip(upcomingTrips[0].id)">
+                Modify
+              </button>
+            </div>
+
+            <div class="countdown-timer" *ngIf="hasUpcomingTrip()">
+              <p class="your-trip-starts-in">Your trip starts in:</p>
+              <div class="timer-display">
+                <div class="timer-unit">
+                  <span class="number">{{ getTimeRemaining().days }}</span>
+                  <span class="label">DAYS</span>
+                </div>
+                <span class="separator">:</span>
+                <div class="timer-unit">
+                  <span class="number">{{ getTimeRemaining().hours }}</span>
+                  <span class="label">HOURS</span>
+                </div>
+                <span class="separator">:</span>
+                <div class="timer-unit">
+                  <span class="number">{{ getTimeRemaining().minutes }}</span>
+                  <span class="label">MINUTES</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="past-trips">Past Trips</h3>
+      <div class="past-trips-grid">
+        <div class="past-trip-card" *ngFor="let trip of pastTrips">
+          <div class="trip-image">
+            <img [src]="trip.imageUrl" [alt]="trip.destination">
+            <div class="image-overlay2">
+              <h3 class="destination">{{ trip.destination }}</h3>
+            </div>
+          </div>
+          
+          <div class="trip-content2">
+            <div class="trip-dates">
+              <i class="fas fa-calendar"></i>
+              <span>{{ trip.date }}</span>
+            </div>
+            <p class="description">{{ trip.description }}</p>
+            <div class="trip-actions2">
+              <button mat-stroked-button class="view-photos-button" (click)="viewPhotos(trip.id)">
+                View Photos
+              </button>
+              <button mat-raised-button class="write-review-button" (click)="writeReview(trip.id)">
+                Write Review
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendations-section">
+      <h2 class="recommended-for-you">Recommended For You</h2>
+      <p class="based-on-your-travel-history-and-preferences">
+        Based on your travel history and preferences
+      </p>
+      
+      <div class="recommendations-grid">
+        <div class="recommendation-card" *ngFor="let rec of recommendations">
+          <div class="rec-image">
+            <img [src]="rec.imageUrl" [alt]="rec.destination">
+            <div class="image-overlay3">
+              <button class="favorite-button">
+                <i class="fas fa-heart"></i>
+              </button>
+              <h3 class="destination">{{ rec.destination }}</h3>
+            </div>
+          </div>
+          
+          <div class="card-content">
+            <div class="info-row">
+              <div class="duration">
+                <i class="fas fa-clock"></i>
+                <span>{{ rec.duration }}</span>
+              </div>
+              <div class="rating">
+                <i class="fas fa-star"></i>
+                <span>{{ rec.rating }}</span>
+                <span class="reviews">({{ rec.reviews }})</span>
+              </div>
+            </div>
+            
+            <p class="description">{{ rec.description }}</p>
+            
+            <div class="card-footer">
+              <div class="price-info">
+                <span class="from">From</span>
+                <span class="price">${{ rec.price }}</span>
+              </div>
+              <button mat-raised-button class="view-button" (click)="viewTripDetails(rec.id)">
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

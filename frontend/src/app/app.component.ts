@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { fadeAnimation } from './shared/animations/route-animations';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, RouterModule],
   template: `
     <div class="router-container">
       <router-outlet></router-outlet>
     </div>
   `,
-  animations: [fadeAnimation],
   styles: [`
     .router-container {
       background: var(--cream);
@@ -20,6 +19,4 @@ import { fadeAnimation } from './shared/animations/route-animations';
     }
   `]
 })
-export class AppComponent {
-  // No necesitamos el método getRouteState aquí
-}
+export class AppComponent {}

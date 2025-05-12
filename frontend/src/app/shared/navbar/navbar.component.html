@@ -12,6 +12,25 @@
   </div>
 
   <div class="auth-buttons">
-    <button routerLink="/login" class="cta-button">Login</button>
+    <button *ngIf="!authService.isLoggedIn()" routerLink="/login" class="cta-button">Login</button>
+    
+    <div *ngIf="authService.isLoggedIn()" class="user-circle" (click)="toggleUserMenu()">
+      <i class="fas fa-user"></i>
+      
+      <!-- Menú desplegable -->
+      <div class="dropdown-menu" *ngIf="showUserMenu">
+        <a routerLink="/profile" class="dropdown-item">Profile</a>
+        <a (click)="logout()" class="dropdown-item">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-menu" *ngIf="authService.isLoggedIn()">
+    <div class="notification-icon">
+      <img class="frame2" src="assets/frame1.svg" />
+    </div>
+    <div class="user-avatar" [routerLink]="['/profile']">
+      <div class="ar">{{ authService.currentUser$ | async | userInitials }}</div>
+    </div>
   </div>
 </nav>

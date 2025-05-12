@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-layout',
@@ -60,27 +59,27 @@ import { trigger, transition, style, animate } from '@angular/animations';
       </main>
     </div>
   `,
-  animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms ease-in', style({ opacity: 1 }))
-      ])
-    ])
-  ],
   styles: [`
     .admin-layout {
       display: flex;
-      min-height: 100vh;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
     }
 
     .sidebar {
       width: 250px;
+      min-width: 250px;
       background: #1a2233;
-      padding: 1.5rem;
+      padding: 1rem;
       display: flex;
       flex-direction: column;
       color: white;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      overflow-y: auto;
     }
 
     .brand {
@@ -159,8 +158,41 @@ import { trigger, transition, style, animate } from '@angular/animations';
 
     .main-content {
       flex: 1;
-      background: #f8fafc;
+      height: 100vh;
       overflow-y: auto;
+      overflow-x: hidden;
+      padding: 1rem;
+      background: #f8fafc;
+    }
+
+    @media (max-width: 1024px) {
+      .sidebar {
+        width: 200px;
+        min-width: 200px;
+      }
+
+      .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .admin-layout {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        min-height: auto;
+      }
+
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
     }
   `]
 })

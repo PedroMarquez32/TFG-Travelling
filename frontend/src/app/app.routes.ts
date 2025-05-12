@@ -10,6 +10,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { AdminDashboardComponent } from './pages/admin/dashboard/admin-dashboard.component';
 import { AdminDestinationsComponent } from './pages/admin/destinations/admin-destinations.component';
 import { DestinationDetailsComponent } from './pages/destination-details/destination-details.component';
+import { UserProfilePageComponent } from './pages/user-profile-page/user-profile-page.component';
 
 export const routes: Routes = [
   {
@@ -39,13 +40,15 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
-    data: { animation: 'login' }
+    loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)
   },
   {
     path: 'register',
-    component: RegisterComponent,
-    data: { animation: 'register' }
+    loadComponent: () => import('./pages/auth/register/register.component').then(m => m.RegisterComponent)
+  },
+  {
+    path: 'profile',
+    component: UserProfilePageComponent
   },
   {
     path: 'contact',
@@ -54,48 +57,12 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminLayoutComponent,
-    canActivate: [AdminGuard],
-    children: [
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      },
-      {
-        path: 'dashboard',
-        component: AdminDashboardComponent
-      },
-      {
-        path: 'destinations',
-        component: AdminDestinationsComponent
-      },
-      {
-        path: 'users',
-        loadComponent: () => import('./pages/admin/users/admin-users.component')
-          .then(m => m.AdminUsersComponent)
-      },
-      {
-        path: 'bookings',
-        loadComponent: () => import('./pages/admin/bookings/admin-bookings.component')
-          .then(m => m.AdminBookingsComponent)
-      },
-      {
-        path: 'finances',
-        loadComponent: () => import('./pages/admin/finances/admin-finances.component')
-          .then(m => m.AdminFinancesComponent)
-      },
-      {
-        path: 'reviews',
-        loadComponent: () => import('./pages/admin/reviews/admin-reviews.component')
-          .then(m => m.AdminReviewsComponent)
-      },
-      {
-        path: 'settings',
-        loadComponent: () => import('./pages/admin/settings/admin-settings.component')
-          .then(m => m.AdminSettingsComponent)
-      }
-    ]
+    loadChildren: () => import('./pages/admin/admin.routes').then(m => m.ADMIN_ROUTES)
+  },
+  {
+    path: '',
+    redirectTo: '/',
+    pathMatch: 'full'
   },
   {
     path: '**',
